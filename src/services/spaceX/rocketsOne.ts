@@ -1,22 +1,19 @@
 import { Route } from "OpenApiRouter";
-import { handleHello } from ".";
+import { handleApi } from "./index";
 
-describe("hello operation", () => {
+describe("Get a rocket", () => {
   it("should return a 200 response", async () => {
-    // GIVEN
     const route: Route = {
-      route: "/hello",
+      route: "/rockets",
       operation: {
-        operationId: "hello",
+        operationId: "rocketsOne",
         responses: {}
       },
       pathParameters: {}
     };
 
-    // WHEN
-    const response = handleHello(route);
+    const response = handleApi(route);
 
-    // THEN
     expect(response).toMatchSnapshot();
   });
 });

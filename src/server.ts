@@ -1,21 +1,32 @@
 import path from "path";
 import chalk from "chalk";
 import express from "express";
-import { dispatch } from "./dispatch";
+// import { dispatch } from "./dispatch";
+import { handle } from "./apiHandle";
+
 import { getOpenApiRouter } from "utils/openApi";
 
 const PORT = 4444;
 
 void (async () => {
   const app = express();
-  const specPath = path.resolve("spec.yml");
-  const maybeRouter = await getOpenApiRouter(specPath);
+  // const specPath = path.resolve("spec.yml");
+  // const maybeRouter = await getOpenApiRouter(specPath);
 
-  if (!maybeRouter) {
+  // if (!maybeRouter) {
+  //   return;
+  // }
+
+  //const newrouter = maybeRouter;
+
+  const specApi = path.resolve("apiSpec.yml");
+  const getroute = await getOpenApiRouter(specApi);
+
+  if (!getroute) {
     return;
   }
 
-  const router = maybeRouter;
+  const router = getroute;
 
   app.all("*", async (req, res) => {
     // Log request
@@ -34,22 +45,30 @@ void (async () => {
         res.status(404).send({ message: "not found" });
         return;
       }
+      const endpoint = await handle(routerResult);
 
-      const result = await dispatch(routerResult);
-
-      if (!result) {
+      if (!endpoint) {
         res.status(501).send({ message: "not implemented" });
         return;
       }
 
+      // const result = await dispatch(routerResult);
+
+      // if (!result) {
+      //   res.status(501).send({ message: "not implemented" });
+      //   return;
+      // }
+
       // Set additional headers
-      if (result?.headers) {
-        Object.entries(result?.headers).forEach(([headerName, headerValue]) => {
-          res.setHeader(headerName, headerValue);
-        });
+      if (endpoint?.headers) {
+        Object.entries(endpoint?.headers).forEach(
+          ([headerName, headerValue]) => {
+            res.setHeader(headerName, headerValue);
+          }
+        );
       }
 
-      res.status(result.status).send(result?.body);
+      res.status(endpoint.status).send(endpoint?.body);
       return;
     } catch (err) {
       console.log(
