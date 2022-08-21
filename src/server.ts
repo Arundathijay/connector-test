@@ -2,20 +2,30 @@ import path from "path";
 import chalk from "chalk";
 import express from "express";
 import { dispatch } from "./dispatch";
+
 import { getOpenApiRouter } from "utils/openApi";
 
 const PORT = 4444;
 
 void (async () => {
   const app = express();
-  const specPath = path.resolve("spec.yml");
-  const maybeRouter = await getOpenApiRouter(specPath);
+  // const specPath = path.resolve("spec.yml");
+  // const maybeRouter = await getOpenApiRouter(specPath);
 
-  if (!maybeRouter) {
+  // if (!maybeRouter) {
+  //   return;
+  // }
+
+  //const newrouter = maybeRouter;
+
+  const specPath = path.resolve("spec.yml");
+  const getroute = await getOpenApiRouter(specPath);
+
+  if (!getroute) {
     return;
   }
 
-  const router = maybeRouter;
+  const router = getroute;
 
   app.all("*", async (req, res) => {
     // Log request

@@ -5,7 +5,7 @@ export const handleHello = (_route: Route): Result | null => {
   return {
     status: 200,
     body: {
-      message: "Hello, world!",
-    },
+      message: "Hello, world!"
+    }
   };
 };

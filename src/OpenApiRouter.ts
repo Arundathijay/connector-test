@@ -19,10 +19,10 @@ export interface Route {
 export class OpenApiRouter {
   private paths: PathDefinition[];
 
-  constructor(spec: OpenAPIV3.Document) {
+  constructor(apiSpec: OpenAPIV3.Document) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    this.paths = Object.entries(spec.paths).map(([path, value]) => {
+    this.paths = Object.entries(apiSpec.paths).map(([path, value]) => {
       const pathRegex = new RegExp(
         `^${path.replace(/{(.+?)}/g, "(?<$1>.+)")}$`
       );
