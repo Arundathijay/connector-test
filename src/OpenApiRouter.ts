@@ -39,7 +39,7 @@ export class OpenApiRouter {
               "patch",
               "put",
               "delete",
-              "trace",
+              "trace"
             ].includes(key)
           )
           .map(([key, op]) => [key.toUpperCase(), op])
@@ -67,7 +67,7 @@ export class OpenApiRouter {
         const route: Route = {
           route: pathDef.path,
           operation,
-          pathParameters: (match.groups ?? {}) as Record<string, string>,
+          pathParameters: (match.groups ?? {}) as Record<string, string>
         };
 
         return route;
@@ -87,7 +87,7 @@ export class OpenApiRouter {
         ? {
             route: p.path,
             operation: op,
-            pathParameters: {},
+            pathParameters: {}
           }
         : null;
     });

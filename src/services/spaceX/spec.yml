@@ -1,0 +1,70 @@
+openapi: 3.0.3
+info:
+  title: This is spaceX api
+  description: Spacex Openapi to get rocket details.
+  version: 0.0.1
+servers:
+  - url: https://api.spacexdata.com/v3
+
+paths:
+  /rockets:
+    get:
+      description: list all the rockets
+      operationId: rocketsOne
+      responses:
+        "200":
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: string
+                    country:
+                      type: string
+                    company:
+                      type: string
+                    main_image:
+                      type: string
+                    cost_per_launch:
+                      type: object
+                    curruncy:
+                      type: string
+        "400":
+          description: Invalid ID supplied
+
+  /rockets/{rocket_id}:
+    get:
+      description: fetch a single rocket
+      operationId: getRocketById
+      parameters:
+        - name: rocket_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: string
+                    country:
+                      type: string
+                    company:
+                      type: string
+                    main_image:
+                      type: string
+                    cost_per_launch:
+                      type: object
+                    curruncy:
+                      type: string
+        "400":
+          description: Invalid ID supplied

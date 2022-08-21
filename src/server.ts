@@ -34,7 +34,6 @@ void (async () => {
         res.status(404).send({ message: "not found" });
         return;
       }
-
       const result = await dispatch(routerResult);
 
       if (!result) {

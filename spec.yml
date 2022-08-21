@@ -4,6 +4,7 @@ info:
   version: 0.0.1
 servers:
   - url: "https://unify.apideck.com"
+  - url: "https://api.spacexdata.com/v3"
 externalDocs:
   description: Apideck Developer Docs
   url: "https://developers.apideck.com"
@@ -17,10 +18,30 @@ paths:
         "200":
           description: "Say hello"
           content: {}
-  /space/rockets/{rocketId}:
+  /rockets:
     get:
-      operationId: rocketsOne
+      description: list all the rockets
+      operationId: rockets
       responses:
         "200":
-          description: "Get a rocket"
-          content: {}
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: string
+                    country:
+                      type: string
+                    company:
+                      type: string
+                    main_image:
+                      type: string
+                    cost_per_launch:
+                      type: object
+                    curruncy:
+                      type: string
+        "400":
+          description: Invalid ID supplied
