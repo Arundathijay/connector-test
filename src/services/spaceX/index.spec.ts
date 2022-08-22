@@ -1,5 +1,5 @@
 import { Route } from "OpenApiRouter";
-import { handleApi } from ".";
+import { handleRocket } from ".";
 
 describe("Get a rocket", () => {
   it("should return a 200 response", async () => {
@@ -12,7 +12,7 @@ describe("Get a rocket", () => {
       pathParameters: {}
     };
 
-    const responses = handleApi(route);
+    const responses = handleRocket(route);
 
     expect(responses).toMatchSnapshot();
   });

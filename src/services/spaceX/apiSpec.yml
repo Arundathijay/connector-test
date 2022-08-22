@@ -1,40 +1,7 @@
-# openapi: 3.0.3
-# info:
-#   title: "This is spaceX api"
-#   version: "1.0.2"
-# servers:
-#   - url: https://api.spacexdata.com/v3
-
-# paths:
-#   /rockets:
-#     description: displays all the rockets
-#     get:
-#       operationId: rocketsOne
-#       responses:
-#         "200":
-#           description: successful operation
-# schemas:
-#   Rockets:
-#     type: array
-#     properties:
-#       id:
-#         type: integer
-#         format: int64
-#       country:
-#         type: string
-#       Company:
-#         type: string
-#       main_image:
-#         type: string
-#       cost_per_launch:
-#         type: integer
-#         content: {}
-#         "400":
-#           description: Rocket not found
 openapi: 3.0.3
 info:
   title: This is spaceX api
-  version: 1.0.0-oas3
+  version: 1.0.0
 servers:
   - url: https://api.spacexdata.com/v3
 tags:
@@ -43,30 +10,31 @@ tags:
 paths:
   /rockets:
     get:
-      tags:
-        - rocket
-      summary: list all the rockets
-      operationId: rocketsOne
+      description: list all the rockets
+      operationId: rockets
       responses:
         "200":
-          description: Successful operation
+          description: "Successful operation"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: string
+                    country:
+                      type: string
+                    Company:
+                      type: string
+                    main_image:
+                      type: string
+                    cost_per_launch:
+                      type: object
+                    curruncy:
+                      type: string
         "400":
           description: Invalid ID supplied
-      components: null
-      application/json:
-        schema:
-
-      properties:
-        id:
-          type: integer
-        country:
-          type: string
-        company:
-          type: string
-        main_image:
-          type: string
-        cost_per_launch:
-          type: integer
   /rockets/{rocket_id}:
     get:
       tags:

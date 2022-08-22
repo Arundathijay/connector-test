@@ -4,6 +4,7 @@ import OpenApiParser from "@apidevtools/swagger-parser";
 import { OpenApiRouter } from "OpenApiRouter";
 
 export const getOpenApiSpec = async (specPath: string) => {
+  console.log(specPath);
   let spec: OpenAPI.Document<{}> | undefined = undefined;
   try {
     spec = await OpenApiParser.bundle(specPath);
@@ -19,6 +20,7 @@ export const getOpenApiSpec = async (specPath: string) => {
 };
 
 export const getOpenApiRouter = async (specPath: string) => {
+  console.log(specPath);
   let spec: OpenAPI.Document<{}> | undefined = undefined;
   try {
     spec = await OpenApiParser.bundle(specPath);

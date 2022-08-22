@@ -18,7 +18,7 @@ void (async () => {
 
   //const newrouter = maybeRouter;
 
-  const specPath = path.resolve("spec.yml");
+  const specPath = path.resolve("./src/services/spaceX/apiSpec.yml");
   const getroute = await getOpenApiRouter(specPath);
 
   if (!getroute) {

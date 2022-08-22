@@ -1,5 +1,5 @@
 import { Route } from "OpenApiRouter";
-import { handleApi } from "./services/spaceX";
+import { handleRocket } from "./services/spaceX";
 
 export interface Handle {
   body?: any;
@@ -10,7 +10,7 @@ export interface Handle {
 export const handle = async (route: Route): Promise<Handle | null> => {
   switch (route.operation.operationId) {
     case "rocket":
-      return await handleApi(route);
+      return await handleRocket(route);
     default:
       return null;
   }
